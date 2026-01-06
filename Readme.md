@@ -104,7 +104,7 @@ Where L is the number of points in the shortest path.
 
 ## Example
 
-**Input**
+**Input** :
 (0 0) |
 (10 10) |
 2 |
@@ -119,7 +119,7 @@ Where L is the number of points in the shortest path.
 (7 8) |
 
 
-**Output**
+**Output** :
 5 |
 (0 0) |
 (2 2) |
