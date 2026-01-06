@@ -71,16 +71,16 @@ O(n² log n)
 
 ## Input Format
 
-(sx sy)
-(tx ty)
-M
-k1
-(x11 y11)
-...
-(x1k1 y1k1)
-k2
-...
-kM
+(sx sy) |
+(tx ty) |
+M |
+k1 |
+(x11 y11) |
+... |
+(x1k1 y1k1) |
+k2 |
+... |
+kM |
 
 - (sx, sy) → start point  
 - (tx, ty) → end point  
@@ -93,10 +93,10 @@ kM
 ## Output Format
 
 L
-(x1 y1)
-(x2 y2)
-...
-(xL yL)
+(x1 y1)|
+(x2 y2) |
+... |
+(xL yL) |
 
 Where L is the number of points in the shortest path.
 
@@ -105,24 +105,24 @@ Where L is the number of points in the shortest path.
 ## Example
 
 **Input**
-(0 0)
-(10 10)
-2
-4
-(2 2)
-(4 2)
-(4 4)
-(2 4)
-3
-(6 6)
-(8 6)
-(7 8)
+(0 0) |
+(10 10) |
+2 |
+4 |
+(2 2) |
+(4 2) |
+(4 4) |
+(2 4) |
+3 |
+(6 6) |
+(8 6) |
+(7 8) |
 
 
 **Output**
-5
-(0 0)
-(2 2)
-(4 4)
-(7 8)
-(10 10)
+5 |
+(0 0) |
+(2 2) |
+(4 4) |
+(7 8) |
+(10 10) |
