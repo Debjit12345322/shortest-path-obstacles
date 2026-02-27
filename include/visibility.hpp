@@ -1,6 +1,7 @@
 #pragma once
 #include "geometry.hpp"
-#include <vector>
+#include <bits/stdc++.h>
+using namespace std;
 
 bool visible(const Point &a, const Point &b,
-             const std::vector<std::vector<Point>> &obstacles);
+             const vector<vector<Point>> &obstacles);
