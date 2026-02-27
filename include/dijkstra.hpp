@@ -1,9 +1,10 @@
 #pragma once
 #include <vector>
+using namespace std;
 
-std::vector<int> dijkstra(
+vector<int> dijkstra(
     int n,
-    const std::vector<std::vector<std::pair<int,double>>> &graph,
+    const vector<vector<pair<int,double>>> &graph,
     int src,
     int dst
 );
