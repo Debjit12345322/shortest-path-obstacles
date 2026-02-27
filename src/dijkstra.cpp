@@ -1,19 +1,18 @@
 #include "dijkstra.hpp"
-#include <queue>
-#include <limits>
-#include <algorithm>
+#include <bits/stdc++.h>
+using namespace std;
 
-std::vector<int> dijkstra(
+vector<int> dijkstra(
     int n,
-    const std::vector<std::vector<std::pair<int,double>>> &graph,
+    const vector<vector<pair<int,double>>> &graph,
     int src,
     int dst
 ) {
-    std::vector<double> dist(n, std::numeric_limits<double>::infinity());
-    std::vector<int> parent(n, -1);
+    vector<double> dist(n, numeric_limits<double>::infinity());
+    vector<int> parent(n, -1);
 
-    using P = std::pair<double,int>;
-    std::priority_queue<P, std::vector<P>, std::greater<P>> pq;
+    using P = pair<double,int>;
+    priority_queue<P, vector<P>, greater<P>> pq;
 
     dist[src] = 0;
     pq.push({0, src});
@@ -38,10 +37,10 @@ std::vector<int> dijkstra(
         }
     }
 
-    std::vector<int> path;
+    vector<int> path;
     for (int v = dst; v != -1; v = parent[v])
         path.push_back(v);
 
-    std::reverse(path.begin(), path.end());
+    reverse(path.begin(), path.end());
     return path;
 }
