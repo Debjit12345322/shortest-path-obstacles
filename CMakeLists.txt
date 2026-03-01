@@ -19,4 +19,10 @@ add_executable(shortest_path_obstacles
         src/visibility.cpp
         input.txt
         path.exe
-        path.txt)
+        path.txt
+        src/Geometry.cpp
+        src/Geometry.h
+        src/Pathfinder.cpp
+        src/Pathfinder.h
+        main.cpp
+)
