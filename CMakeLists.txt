@@ -10,13 +10,6 @@ add_executable(shortest_path_obstacles
         .idea/modules.xml
         .idea/shortest-path-obstacles.iml
         .idea/vcs.xml
-        include/dijkstra.hpp
-        include/geometry.hpp
-        include/visibility.hpp
-        src/dijkstra.cpp
-        src/geometry.cpp
-        src/main.cpp
-        src/visibility.cpp
         input.txt
         path.exe
         path.txt
