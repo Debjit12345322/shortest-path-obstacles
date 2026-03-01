@@ -2,14 +2,30 @@
 #include <queue>
 #include <algorithm>
 
-std::vector<Point> Pathfinder::solve(Point start, Point end, const std::vector<Polygon>& obstacles) {
-    std::vector<Point> nodes = {start, end};
+bool Pathfinder::isPathClear(Point a, Point b, const std::vector<Polygon>& obstacles) {
+    // 1. Check for edge intersections
+    for (const auto& poly : obstacles) {
+        for (const auto& edge : poly.getEdges()) {
+            if (GeoUtils::doIntersect(a, b, edge.a, edge.b)) return false;
+        }
+    }
+
+    // 2. Check if the midpoint of the segment is inside any obstacle
+    Point midpoint = {(a.x + b.x) / 2.0, (a.y + b.y) / 2.0};
+    for (const auto& poly : obstacles) {
+        if (poly.contains(midpoint)) return false;
+    }
+
+    return true;
+}
+
+vector<Point> Pathfinder::solve(Point start, Point end, const vector<Polygon>& obstacles) {
+    vector<Point> nodes = {start, end};
     for (const auto& poly : obstacles) {
         for (const auto& v : poly.vertices) nodes.push_back(v);
     }
 
-    // Map each point to its visible neighbors and the distance to them
-    std::map<Point, std::vector<std::pair<Point, double>>> adj;
+    map<Point, vector<pair<Point, double>>> adj;
     for (size_t i = 0; i < nodes.size(); ++i) {
         for (size_t j = i + 1; j < nodes.size(); ++j) {
             if (isPathClear(nodes[i], nodes[j], obstacles)) {
@@ -20,9 +36,9 @@ std::vector<Point> Pathfinder::solve(Point start, Point end, const std::vector<P
         }
     }
 
-    std::priority_queue<std::pair<double, Point>, std::vector<std::pair<double, Point>>, std::greater<>> pq;
-    std::map<Point, double> gScore;
-    std::map<Point, Point> parent;
+    priority_queue<pair<double, Point>, vector<pair<double, Point>>, greater<>> pq;
+    map<Point, double> gScore;
+    map<Point, Point> parent;
 
     for (const auto& n : nodes) gScore[n] = 1e18;
     gScore[start] = 0;
@@ -46,19 +62,14 @@ std::vector<Point> Pathfinder::solve(Point start, Point end, const std::vector<P
     return {};
 }
 
-bool Pathfinder::isPathClear(Point a, Point b, const std::vector<Polygon>& obstacles) {
-    for (const auto& poly : obstacles) {
-        for (const auto& edge : poly.getEdges()) {
-            if (GeoUtils::doIntersect(a, b, edge.a, edge.b)) return false;
-        }
+vector<Point> Pathfinder::reconstructPath(map<Point, Point>& parent, Point start, Point end) {
+    vector<Point> path;
+    Point curr = end;
+    while (!(curr == start)) {
+        path.push_back(curr);
+        curr = parent[curr];
     }
-    return true;
-}
-
-std::vector<Point> Pathfinder::reconstructPath(std::map<Point, Point>& parent, Point start, Point end) {
-    std::vector<Point> path;
-    for (Point p = end; !(p == start); p = parent[p]) path.push_back(p);
     path.push_back(start);
-    std::reverse(path.begin(), path.end());
+    reverse(path.begin(), path.end());
     return path;
 }

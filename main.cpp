@@ -1,25 +1,29 @@
-#include <iostream>
+
+#include <bits/stdc++.h>
+using namespace std;
 #include "src/Pathfinder.h"
 
 int main() {
     Point start = {0, 0};
-    Point end = {10, 5};
+    Point end = {20, 18};
 
-    // Example Obstacle: A Rhombus
-    Polygon obstacle;
-    obstacle.vertices = {{4, 2}, {6, 1}, {8, 2}, {6, 3}};
+    vector<Polygon> obstacles;
 
-    std::vector<Polygon> obstacles = {obstacle};
+    obstacles.push_back({{ {2,2}, {5,1}, {4,5} }});            // A
+    obstacles.push_back({{ {7,8}, {10,6}, {13,8}, {10,10} }}); // B
+    obstacles.push_back({{ {2,12}, {4,11}, {6,12}, {6,14}, {4,15}, {2,14} }}); // C
+    obstacles.push_back({{ {15,5}, {17,5}, {17,15}, {15,15} }}); // D
+    obstacles.push_back({{ {12,16}, {14,13}, {13,18} }});      // E
+    obstacles.push_back({{ {12,2}, {14,1}, {16,2}, {14,3} }}); // F
 
-    std::vector<Point> result = Pathfinder::solve(start, end, obstacles);
+    vector<Point> path = Pathfinder::solve(start, end, obstacles);
 
-    if (result.empty()) {
-        std::cout << "Path Blocked!" << std::endl;
+    if (path.empty()) {
+        cout << "Path Blocked!" << endl;
     } else {
-        for (const auto& p : result) {
-            std::cout << "(" << p.x << ", " << p.y << ") ";
-        }
-        std::cout << std::endl;
+        cout << "Correct Shortest Path Found:" << endl;
+        for (const auto& p : path) cout << "(" << p.x << ", " << p.y << ") ";
+        cout << endl;
     }
 
     return 0;

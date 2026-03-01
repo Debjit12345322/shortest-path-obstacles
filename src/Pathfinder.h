@@ -1,25 +1,23 @@
-//
-// Created by Lenovo on 01-03-2026.
-//
-
-#ifndef SHORTEST_PATH_OBSTACLES_PATHFINDER_H
-#define SHORTEST_PATH_OBSTACLES_PATHFINDER_H
-
 #ifndef PATHFINDER_H
 #define PATHFINDER_H
 
 #include "Geometry.h"
 #include <map>
+#include <vector>
 
 class Pathfinder {
 public:
-    static std::vector<Point> solve(Point start, Point end, const std::vector<Polygon>& obstacles);
+    /**
+     * Finds the shortest Euclidean path using a Visibility Graph and A*.
+     * Returns an empty vector if no path is possible.
+     */
+    static vector<Point> solve(Point start, Point end, const vector<Polygon>& obstacles);
 
 private:
-    static bool isPathClear(Point a, Point b, const std::vector<Polygon>& obstacles);
-    static std::vector<Point> reconstructPath(std::map<Point, Point>& parent, Point start, Point end);
+    // Enhanced check: now validates against both edge intersections and interior cutting
+    static bool isPathClear(Point a, Point b, const vector<Polygon>& obstacles);
+
+    static vector<Point> reconstructPath(map<Point, Point>& parent, Point start, Point end);
 };
 
 #endif
-
-#endif //SHORTEST_PATH_OBSTACLES_PATHFINDER_H
